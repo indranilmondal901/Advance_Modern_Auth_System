@@ -25,8 +25,16 @@ import {
   Send as SendIcon,
 } from "@mui/icons-material";
 
-const InputField = ({ type,label,name,isRequired, value}) => {
-  
+const InputField = ({
+  type,
+  label,
+  name,
+  isRequired,
+  value,
+  startIcon,
+  endIcon,
+  fullWidth
+}) => {
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -37,27 +45,32 @@ const InputField = ({ type,label,name,isRequired, value}) => {
         <TextField
           id="standard-input-with-icon-textfield"
           type={showPassword ? "text" : "password"}
-          label="Password"
-          name="password"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <KeyOutlinedIcon />
-              </InputAdornment>
-            ),
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
+          label={label}
+          name={name}
+          InputProps={
+            startIcon || endIcon
+              ? {
+                  startAdornment: startIcon && (
+                    <InputAdornment position="start">
+                      {startIcon}
+                    </InputAdornment>
+                  ),
+                  endAdornment: endIcon && (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }
+              : null
+          }
           required
+          fullWidth={fullWidth}
         />
       );
 
@@ -69,21 +82,24 @@ const InputField = ({ type,label,name,isRequired, value}) => {
           label={label}
           name={name}
           value={value}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <AccountCircle />
-              </InputAdornment>
-            ),
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton edge="end">
-                  <AlternateEmailIcon />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
+          InputProps={
+            startIcon || endIcon
+              ? {
+                  startAdornment: startIcon && (
+                    <InputAdornment position="start">
+                      {startIcon}
+                    </InputAdornment>
+                  ),
+                  endAdornment: endIcon && (
+                    <InputAdornment position="end">
+                      <IconButton edge="end">{endIcon}</IconButton>
+                    </InputAdornment>
+                  ),
+                }
+              : null
+          }
           required={isRequired}
+          fullWidth={fullWidth}
         />
       );
   }

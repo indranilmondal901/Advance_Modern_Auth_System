@@ -1,0 +1,106 @@
+body {
+  margin: 0;
+  height: 100vh;
+}
+/* fade in from top */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 1s ease-out; /* You can adjust the duration and timing function */
+}
+/* ----------------------------------------------------------------------------------------------------- */
+
+/* slide from left */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slideInFromLeft {
+  animation: slideInFromLeft 1s ease-out; /* You can adjust the duration and timing function */
+}
+/* ------------------------------------------------------------------------------------------------- */
+
+/* typing */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+/* Blinkink */
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #000; /* blinking cursor color */
+  }
+}
+
+.animated-text {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 0; /* blinking cursor */
+  display: inline-block;
+  animation: typing 10s steps(40, end), blink-caret 0.75s step-end;
+}
+/* ------------------------------------------------------------------------------------------------------ */
+
+/* glowing */
+@keyframes glow {
+  0%,
+  100% {
+    color: #3b0bdb; /* Initial and final color */
+    text-shadow: 0 0 10px rgba(0, 0, 255, 0.7);
+  }
+  50% {
+    color: rgb(255, 0, 106); /* Glow color */
+    text-shadow: 0 0 20px rgba(0, 0, 255, 0.9);
+  }
+}
+.glowing-text {
+  display: inline-block;
+  font-size: 2em; /* Adjust font size as needed */
+  animation: glow 1.5s infinite;
+}
+/* ------------------------------------------------------------------------------------ */
+
+/* left to right*/
+@keyframes moveLeftToRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.moving-paragraph {
+  white-space: nowrap; /* Prevent line breaks */
+  overflow: hidden; /* Hide overflowing content */
+  animation: moveLeftToRight 5s linear infinite;
+}
+
+.moving-paragraph:hover {
+  animation-play-state: paused; /* Pause animation on hover */
+}
+/* ------------------------------------------------------------------------------------------- */

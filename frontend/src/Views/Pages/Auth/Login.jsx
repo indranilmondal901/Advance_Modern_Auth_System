@@ -1,32 +1,13 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import InputField from "../../../Components/InputFields/InputField";
-import {
-  Box,
-  Input,
-  FilledInput,
-  OutlinedInput,
-  InputLabel,
-  InputAdornment,
-  FormHelperText,
-  FormControl,
-  TextField,
-  IconButton,
-  Paper,
-  Grid,
-  styled,
-  Button,
-} from "@mui/material";
-// import { styled } from "@mui/material/styles";
+import { Box, Paper, Grid, styled, Button } from "@mui/material";
 import {
   AccountCircle,
-  Visibility,
-  VisibilityOff,
   KeyOutlined as KeyOutlinedIcon,
   AlternateEmail as AlternateEmailIcon,
   Send as SendIcon,
 } from "@mui/icons-material";
-// import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
-// import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -34,10 +15,26 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
   textAlign: "center",
   color: theme.palette.text.secondary,
+  margin: "2rem",
 }));
 
-const Login = () => {
+const BackGroundCanvas = styled("div")({
+  height: "100vh",
+  color: "darkslategray",
+  // backgroundImage:`url(${require("./Computer_login.gif")})`,
+  // backgroundSize: 'contain',
+  // backgroundPosition: 'center center',
+  // backgroundRepeat: 'no-repeat',
+  backgroundColor: "aliceblue",
+  padding: 0,
+  margin: 0,
+  borderRadius: 4,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+});
 
+const Login = () => {
   /* Login */
   const handleLogin = (e) => {
     e.preventDefault();
@@ -45,57 +42,81 @@ const Login = () => {
     let fromObject = Object.fromEntries(fromData);
     console.log(fromData, fromObject);
   };
-
+console.log(window.location.origin, window.location.pathname)
   return (
-    <div>
-      <Box sx={{ flexGrow: 1 }}>
+    <motion.div
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 2 }}
+      style={{ padding: 0, margin: 0, justifyContent: "Center" }}
+    >
+      <BackGroundCanvas>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6} lg={6}>
-            <Box className="auth-box-left" textAlign={"center"}>
-              <h1 className="auth-box-left-heading">Welcome Back!</h1>
-              <p className="auth-box-left-paragraph">
-                To keep connected with us please login with your credentials
-              </p>
-            </Box>
+            <Item>
+              <div style={{width:"100%", height:"100%"}}>
+                <img src={require("../../../Assets/Computer_login.gif")} alt="uuu"  
+                style={{ width:"50%", height:"50%"}}/>
+                <h1>Welcome Back!</h1>
+                <p className="animated-text">
+                  To keep connected with us please login with your credentials
+                </p>
+              </div>
+            </Item>
           </Grid>
           <Grid item xs={12} md={6} lg={6}>
-            <Box sx={{ flexGrow: 1, mt: "2rem" }}>
-              <Grid container justifyContent="center" spacing={3}>
-                <form method="post" onSubmit={handleLogin}>
-                  <Grid item xs={12} md={12} lg={12} m={2}>
-                    <InputField
-                      type="email"
-                      label="Email"
-                      name="email"
-                      isRequired
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={12} lg={12} m={2}>
-                    <InputField
-                      type="password"
-                      label="Paaword"
-                      name="password"
-                      isRequired
-                    />
-                  </Grid>
+            <Item>
+              <Box
+                component="form"
+                sx={{
+                  "& .MuiTextField-root": { mt: 1, mb: 1 },
+                }}
+                // noValidate
+                // autoComplete="off"
+                onSubmit={handleLogin}
+              >
+                <h1 className="glowing-text">Sign In</h1>
+                <div>
+                  <InputField
+                    type="email"
+                    label="Email"
+                    name="email"
+                    startIcon={<AccountCircle />}
+                    endIcon={<AlternateEmailIcon />}
+                    isRequired
+                    fullWidth
+                  />
+                </div>
 
-                  <Grid item xs={12} md={12} lg={12} m={2}>
-                    <Button
-                      type="submit"
-                      variant="contained"
-                      endIcon={<SendIcon />}
-                      fullWidth
-                    >
-                      Login
-                    </Button>
-                  </Grid>
-                </form>
-              </Grid>
-            </Box>
+                <div>
+                  <InputField
+                    type="password"
+                    label="Paaword"
+                    name="password"
+                    startIcon={<KeyOutlinedIcon />}
+                    endIcon={true} // for password visibility
+                    isRequired
+                    fullWidth
+                  />
+                </div>
+
+                <Grid item xs={12} md={12} lg={12} m={2}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    endIcon={<SendIcon />}
+                    // startIcon=
+                    fullWidth
+                  >
+                    Login
+                  </Button>
+                </Grid>
+              </Box>
+            </Item>
           </Grid>
         </Grid>
-      </Box>
-    </div>
+      </BackGroundCanvas>
+    </motion.div>
   );
 };
 
